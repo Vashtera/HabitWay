@@ -1,5 +1,6 @@
 import asyncio
 from config import TOKEN
+from handlers import register_routes
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -18,6 +19,7 @@ async def command_start_handler(message: Message) -> None:
 # Run the bot
 async def main() -> None:
     bot = Bot(token=TOKEN)
+    register_routes(dp)
     await dp.start_polling(bot)
 
 
