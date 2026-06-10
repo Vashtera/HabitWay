@@ -1,5 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
+#клавиатура для зарегистрированного пользователя
 keyboard_for_existing_user = ReplyKeyboardMarkup(keyboard=[
     [
         KeyboardButton

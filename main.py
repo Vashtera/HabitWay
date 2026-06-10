@@ -1,6 +1,7 @@
 import asyncio
 from config import TOKEN
 from handlers import register_routes
+from database import create_pool
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -18,6 +19,9 @@ async def command_start_handler(message: Message) -> None:
 
 # Run the bot
 async def main() -> None:
+    #Подключаем БД через Пул в Диспетчер
+    pool = await create_pool()
+    dp["pool"] = pool
     bot = Bot(token=TOKEN)
     register_routes(dp)
     await dp.start_polling(bot)
