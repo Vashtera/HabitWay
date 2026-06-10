@@ -1,7 +1,7 @@
 # HabitWay
 My last TG bot for Not Smoking tracker 
 Structure:
-bot/
+HabitWay_bot/
 ├── main.py          — запуск бота
 ├── config.py        — токен, данные БД
 ├── database/
@@ -11,7 +11,7 @@ bot/
 │   ├── start.py     — /start, регистрация
 │   └── tracker.py   — основная логика
 ├── keyboards/
-│   └── menu.py      — кнопки
+│   └── exist_user.py    — кнопки
 ├── states/
 │   └── registration.py  — FSM состояния
 └── middlewares/

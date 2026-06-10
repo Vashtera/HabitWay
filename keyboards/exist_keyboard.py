@@ -12,5 +12,7 @@ keyboard_for_existing_user = ReplyKeyboardMarkup(keyboard=[
             (text='Я сорвался')
     ]
 
-],  resize_keyboard=True,
-    input_field_placeholder="Выберите опцию")
+],  
+    resize_keyboard=True,
+    input_field_placeholder="Выберите опцию"
+)
