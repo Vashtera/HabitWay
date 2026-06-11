@@ -1,7 +1,7 @@
 import asyncio
 from config import TOKEN
 from handlers import register_routes
-from database import create_pool
+from database.initialization import create_pool
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
