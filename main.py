@@ -11,7 +11,6 @@ from aiogram.types import Message
 
 
 dp = Dispatcher()
-dp.update.middleware(DataBaseMiddleware())
 
 
 # Command handler
@@ -26,6 +25,7 @@ async def main() -> None:
     #Подключаем БД через Пул в Диспетчер
     pool = await create_pool()
     dp["pool"] = pool
+    dp.update.middleware(DataBaseMiddleware()) #подключаем middleware
     bot = Bot(token=TOKEN)
     register_routes(dp)
     await dp.start_polling(bot)
@@ -36,4 +36,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("Bot stopped")
-          
