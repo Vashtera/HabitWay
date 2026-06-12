@@ -25,7 +25,7 @@ async def main() -> None:
     #Подключаем БД через Пул в Диспетчер
     pool = await create_pool()
     dp["pool"] = pool
-    dp.update.middleware(DataBaseMiddleware()) #подключаем middleware
+    dp.update.middleware(DataBaseMiddleware(pool)) #подключаем middleware
     bot = Bot(token=TOKEN)
     register_routes(dp)
     await dp.start_polling(bot)
