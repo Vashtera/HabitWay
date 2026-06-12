@@ -2,6 +2,7 @@ import asyncio
 from config import TOKEN
 from handlers import register_routes
 from database.initialization import create_pool
+from keyboards.exist_keyboard import keyboard_for_existing_user 
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -14,7 +15,8 @@ dp = Dispatcher()
 # Command handler
 @dp.message(Command("start"))
 async def command_start_handler(message: Message) -> None:
-    await message.answer("Привет, я твой трекер по не курению")
+    await message.answer("Привет, я твой трекер по не курению", 
+                         reply_markup=keyboard_for_existing_user)
 
 
 # Run the bot
