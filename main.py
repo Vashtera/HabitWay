@@ -3,6 +3,7 @@ from config import TOKEN
 from handlers import register_routes
 from database.initialization import create_pool
 from keyboards.exist_keyboard import keyboard_for_existing_user 
+from middlewares.middleware import DataBaseMiddleware
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
@@ -10,6 +11,7 @@ from aiogram.types import Message
 
 
 dp = Dispatcher()
+dp.update.middleware(DataBaseMiddleware())
 
 
 # Command handler
