@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 from database.requests import add_user, add_cigarettes
+from keyboards.exist_keyboard import keyboard_for_existing_user
 
 router = Router()
 
@@ -77,3 +78,6 @@ async def reg_start_date(message: Message, state: FSMContext):
 
     await add_user(tg_id, fullname, start_date)
     await add_cigarettes(user_cig_in_pack, user_cig_per_day, user_cig_price)
+    await state.clear()
+    await message.answer("Вы успешно прошли регистрацию!",
+                         reply_markup=keyboard_for_existing_user)
