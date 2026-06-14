@@ -8,11 +8,12 @@ async def get_user_by_tg_id(tg_id: int, conn):
 async def add_user(
         tg_id: int,
         name: str,
+        cigarette_id: int,
         date: Any,
         conn
         ):
     return await conn.fetchrow(
-        "INSERT INTO users (tg_id, fullname, start_date) VALUES ($1, $2, $3)", tg_id, name, date
+        "INSERT INTO users (tg_id, fullname, cigarette_id, start_date) VALUES ($1, $2, $3, $4)", tg_id, name, cigarette_id, date
     )
 
 async def add_cigarettes(
