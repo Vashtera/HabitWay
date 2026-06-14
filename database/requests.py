@@ -23,6 +23,6 @@ async def add_cigarettes(
         conn
 ):
     return await conn.fetchrow(
-        "INSERT INTO cigarettes (cigarettes_in_pack, cigarettes_per_day, cigarette_price) VALUES ($1, $2, $3)", 
+        "INSERT INTO cigarettes (cigarettes_in_pack, cigarettes_per_day, cigarette_price) VALUES ($1, $2, $3) RETURNING cigarette_id", 
         cig_in_pack, cig_per_day, cig_price
     )
