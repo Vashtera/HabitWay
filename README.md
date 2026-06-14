@@ -6,7 +6,7 @@ HabitWay_bot/
 ├── config.py        — токен, данные БД
 ├── database/
 │   ├── db.py        — подключение к БД
-│   └── queries.py   — все SQL запросы
+│   └── requests.py   — все SQL запросы
 ├── handlers/
 │   ├── start.py     — /start, регистрация
 │   └── tracker.py   — основная логика

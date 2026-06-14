@@ -17,8 +17,9 @@ dp = Dispatcher()
 
 # start Command handler
 @dp.message(Command("start"))
-async def command_start_handler(message: Message) -> None:
-    if get_user_by_tg_id is None:
+async def command_start_handler(message: Message, conn: None) -> None:
+    user = await get_user_by_tg_id(message.from_user.id, conn)
+    if user is None:
         await message.answer("Привет, давай зарегистрируемся!",
                              reply_markup=keyboard_for_unexist_user)
     else:    
