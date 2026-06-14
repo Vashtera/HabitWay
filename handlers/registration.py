@@ -5,7 +5,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from database.requests import add_user
+from database.requests import add_user, add_cigarettes
 
 router = Router()
 
@@ -74,3 +74,6 @@ async def reg_start_date(message: Message, state: FSMContext):
     user_cig_in_pack = int(data.get("cig_in_pack"))
     user_cig_per_day = int(data.get("cig_per_day"))
     user_cig_price = float(data.get("cig_price"))
+
+    await add_user(tg_id, fullname, start_date)
+    await add_cigarettes(user_cig_in_pack, user_cig_per_day, user_cig_price)
