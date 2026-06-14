@@ -3,7 +3,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from database.requests import get_user_by_tg_id, add_user
+from database.requests import add_user
 
 router = Router()
 
@@ -14,7 +14,7 @@ class Register(StatesGroup):
     cig_price = State()
 
 @router.message(F.text == 'Зарегистрироваться')
-async def reg_date(message: Message, state: FSMContext):
+async def registration(message: Message, state: FSMContext):
     await message.answer('')
     await state.set_state(Register.start_date)
     try:
@@ -23,7 +23,7 @@ async def reg_date(message: Message, state: FSMContext):
         await message.answer("Пожалуйста введите нужный формат даты!")
 
 @router.message(Register.start_date)
-async def reg_cig_in_pack(message: Message, state: FSMContext):
+async def reg_start_date(message: Message, state: FSMContext):
     await state.update_data(start_date=message.text)
     await state.set_state(Register.cig_in_pack)
     try:
@@ -32,7 +32,7 @@ async def reg_cig_in_pack(message: Message, state: FSMContext):
         await message.answer("Пожалуйста введите целое число")
     
 @router.message(Register.cig_in_pack)
-async def reg_cig_per_day(message: Message, state: FSMContext):
+async def reg_cig_in_pack(message: Message, state: FSMContext):
     await state.update_data(cig_in_pack=message.text)
     await state.set_state(Register.cig_per_day)
     try:
@@ -41,7 +41,7 @@ async def reg_cig_per_day(message: Message, state: FSMContext):
         await message.answer("Пожалуйста введите целое число")
 
 @router.message(Register.cig_per_day)
-async def reg_cig_price(message: Message, state: FSMContext):
+async def reg_cig_per_day(message: Message, state: FSMContext):
     await state.update_data(cig_per_day=message.text)
     await state.set_state(Register.cig_price)
     try:
@@ -49,3 +49,6 @@ async def reg_cig_price(message: Message, state: FSMContext):
     except ValueError:
         await message.answer("Пожалуйста введите число")
     
+@router.message(Register.cig_price)
+async def reg_cig_price(message: Message, state: FSMContext):
+    data = await state.get_data()

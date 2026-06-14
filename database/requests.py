@@ -5,13 +5,14 @@ async def get_user_by_tg_id(tg_id: int, conn):
 
 async def add_user(
         tg_id: int,
+        name: str,
         cig_in_pack: int,
         cig_per_day: int,
         cig_price: float,
         conn
         ):
     await conn.fetchrow(
-        "INSERT INTO users (tg_id) VALUES ($1)", tg_id
+        "INSERT INTO users (tg_id, fullname) VALUES ($1, $2)", tg_id, name
     )
     return await conn.fetchrow(
         "INSERT INTO cigarettes (cigarettes_in_pack, cigarettes_per_day, cigarette_price) VALUES ($1, $2, $3)", 
