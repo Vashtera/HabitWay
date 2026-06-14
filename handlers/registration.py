@@ -18,7 +18,6 @@ class Register(StatesGroup):
 
 @router.message(F.text == 'Зарегистрироваться')
 async def registration(message: Message, state: FSMContext):
-    await message.answer('')
     await state.set_state(Register.cig_price)
     await message.answer("Введите цену за пачку сигарет")
 
