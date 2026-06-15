@@ -18,7 +18,7 @@ async def show_profile(message: Message, pool):
     user_days_without_smoke = Calculate().days_without_smoke(str(user_start_date))
     total_not_smoked_cig = Calculate().total_not_smoked_cigarettes(int(user_total_not_smoked))
     await message.answer(
-        f"Привет! {message.from_user_fullname}\n"
+        f"Привет! {message.from_user.full_name}\n"
         f"Дата начала: {user['start_date']}\n" 
         f"Дней без курения: {user_days_without_smoke}\n"
         f"Сэкономлено денег: {user['total_save_money']}\n" 
