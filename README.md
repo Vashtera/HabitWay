@@ -4,18 +4,20 @@
 
 ```
 HabitWay_bot/
-├── main.py              — запуск бота
-├── config.py            — токен, данные БД
+├── main.py                  — запуск бота и приветствие
+├── config.py                — токен, данные БД
 ├── database/
-│   ├── db.py            — подключение к БД
-│   └── requests.py      — все SQL запросы
+│   ├── initializition.py    — подключение к БД
+│   └── requests.py          — все SQL запросы
 ├── handlers/
-│   ├── start.py         — /start, регистрация
-│   └── tracker.py       — основная логика
+│   ├── __init__.py          - инициализация хэндлера
+│   ├── registration.py      - процесс регистрации
+│   └── profile.py           - показ профиля
 ├── keyboards/
-│   └── exist_user.py    — кнопки
+│   ├── exist_keyboard.py    — кнопки для зарегистрированного пользователя
+│   └── unexist_keyboard.py  - кнопка для незарегистрированного пользователя
 ├── states/
-│   └── registration.py  — FSM состояния
+│   └── registration.py      - состояние для регистрации
 └── middlewares/
-    └── db.py            — передача соединения БД в handlers
+    └── middleware.py        — передача соединения БД в handlers
 ```   

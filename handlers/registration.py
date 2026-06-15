@@ -3,18 +3,12 @@ from datetime import datetime
 from aiogram import F, Router
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
 
+from states.registration import Register
 from database.requests import add_user, add_cigarettes
 from keyboards.exist_keyboard import keyboard_for_existing_user
 
 router = Router()
-
-class Register(StatesGroup):
-    start_date = State()
-    cig_in_pack = State()
-    cig_per_day = State()
-    cig_price = State()
 
 @router.message(F.text == 'Зарегистрироваться')
 async def registration(message: Message, state: FSMContext):

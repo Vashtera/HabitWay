@@ -14,11 +14,13 @@ async def show_profile(message: Message, pool):
     await message.answer(
         f"Привет! {message.from_user_fullname}\n"
         f"Дата начала: {user['start_date']}\n" 
-        f"Дней без курения: ...\n"
+        f"Дней без курения: "
         f"Сэкономлено денег: {user['total_save_money']}\n" 
         f"Не выкурено сигарет: ...\n"
 
     )
+
+
     
 
 
