@@ -16,6 +16,9 @@ class Calculate:
         self.price = cig_price / cig_in_pack
         return self.price
     
-    def total_saved_money(self) -> float:
+    async def total_saved_money(self, conn) -> float:
         total = self.total_cig * self.price
+        await conn.fetchrow(
+        "INSERT INTO users (total_save_money) VALUES ($1)", total
+        )
         return round(total, 2)
