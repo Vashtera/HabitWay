@@ -1,6 +1,7 @@
 # HabitWay
-My last TG bot for Not Smoking tracker 
-Structure:
+##My last TG bot for Not Smoking tracker 
+###Structure:
+'''
 HabitWay_bot/
 ├── main.py          — запуск бота
 ├── config.py        — токен, данные БД
@@ -16,3 +17,4 @@ HabitWay_bot/
 │   └── registration.py  — FSM состояния
 └── middlewares/
     └── db.py        — передача соединения БД в handlers
+'''    
