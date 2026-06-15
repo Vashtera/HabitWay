@@ -26,3 +26,9 @@ async def add_cigarettes(
         "INSERT INTO cigarettes (cigarettes_in_pack, cigarettes_per_day, cigarette_price) VALUES ($1, $2, $3) RETURNING cigarette_id", 
         cig_in_pack, cig_per_day, cig_price
     )
+
+async def get_data_from_all_tables(tg_id: int, conn):
+    return await conn.fetchrow(
+        "SELECT * FROM users JOIN cigarettes ON users.cigarette_id = cigarettes.cigarette_id WHERE tg_id = $1", 
+        tg_id
+    )

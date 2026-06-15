@@ -3,7 +3,7 @@ from datetime import datetime
 class Calculate:
        
     def days_without_smoke(self, start_date: str) -> int:
-        start_date_obj = datetime.strptime(start_date, '%d.%m.%Y').date()
+        start_date_obj = datetime.strptime(start_date, '%Y.%m.%d').date()
         today = datetime.now().date()
         self.days_without_smoking = (today - start_date_obj).days
         return self.days_without_smoking
