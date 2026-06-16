@@ -21,5 +21,5 @@ class Calculate:
     async def total_saved_money(self, cig_in_pack: int, cig_price: float, conn) -> float:
         price = cig_price / cig_in_pack
         total = self.total_cig * price
-        request = await add_money(total, conn)
-        return request
+        request = add_money(total, conn)
+        return await request
