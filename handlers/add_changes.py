@@ -22,4 +22,5 @@ async def register_change(message: Message, state: FSMContext, conn: None):
         return
     await state.update_data(cig_price_change = val_price)
     await change_the_price(val_price, conn)
+    await state.clear()
     await message.answer("Цена успешно изменена!")

@@ -20,3 +20,6 @@ class Calculate:
         price = cig_price / cig_in_pack
         total = self.total_cig * price
         return round(total, 1)
+    
+class Changes:
+    
