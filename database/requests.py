@@ -33,7 +33,8 @@ async def get_data_from_all_tables(tg_id: int, conn):
         tg_id
     )
 #внести данные о сэкономленных деньгах
-async def add_money(total_saved_money: float, conn):
+async def add_money(tg_id: int, total_saved_money: float, conn):
     return await conn.fetchrow(
-        "INSERT INTO users (total_save_money) VALUES ($1)", total_saved_money
+        "UPDATE users SET total_save_money = $1 WHERE tg_id = $2 RETURNING total_save_money", 
+        total_saved_money, tg_id
     )
