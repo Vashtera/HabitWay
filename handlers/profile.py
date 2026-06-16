@@ -23,6 +23,7 @@ async def show_profile(message: Message, pool):
         total_not_smoked_cig = calc.total_not_smoked_cigarettes(int(cigarette.get('cigarettes_per_day')))
         user_total_saved_money = calc.total_saved_money(user_cig_in_pack,user_cig_price)
         await add_money(message.from_user.id, user_total_saved_money, conn)
+        
     await message.answer(
         f"Привет! {message.from_user.full_name}\n"
         f"Дата начала: {user['start_date']}\n"  

@@ -5,3 +5,6 @@ class Register(StatesGroup):
     cig_in_pack = State()
     cig_per_day = State()
     cig_price = State()
+
+class Change(StatesGroup):
+    cig_price_change = State()

@@ -38,3 +38,8 @@ async def add_money(tg_id: int, total_saved_money: float, conn):
         "UPDATE users SET total_save_money = $1 WHERE tg_id = $2 RETURNING total_save_money", 
         total_saved_money, tg_id
     )
+
+async def change_the_price(new_price: float, conn):
+    return await conn.fetchrow(
+        "UPDATE cigarettes AS c SET cigarette_price = ($1) FROM users AS u WHERE c.cigarette_id = u.cigarette_id", new_price
+    )
