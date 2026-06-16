@@ -19,4 +19,4 @@ class Calculate:
     def total_saved_money(self, cig_in_pack: int, cig_price: float) -> float:
         price = cig_price / cig_in_pack
         total = self.total_cig * price
-        return round(total, 2)
+        return round(total, 1)
