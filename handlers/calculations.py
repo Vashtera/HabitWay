@@ -17,12 +17,9 @@ class Calculate:
     def total_not_smoked_cigarettes(self, cig_per_day: int) -> int:
         self.total_cig = self.days_without_smoking * cig_per_day
         return self.total_cig
-
-    def one_cig_price(self, cig_in_pack: int, cig_price: float) -> float:
-        self.price = cig_price / cig_in_pack
-        return self.price
     
-    async def total_saved_money(self, conn) -> float:
-        total = self.total_cig * self.price
+    async def total_saved_money(self, cig_in_pack: int, cig_price: float, conn) -> float:
+        price = cig_price / cig_in_pack
+        total = self.total_cig * price
         request = await add_money(total, conn)
         return request
