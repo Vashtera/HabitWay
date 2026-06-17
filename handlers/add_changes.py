@@ -25,12 +25,12 @@ async def register_change(message: Message, state: FSMContext, conn: None):
         return
     await state.update_data(cig_price_change = val_price)
     user = await get_data_from_all_tables(message.from_user.id, conn)
-    today_str = str(datetime.now().date())
+    today = datetime.now().date()
     user_old_date = user.get('start_date')
     user_old_price = user.get('cigarette_price')
     user_cig_in_pack = user.get('cigarettes_in_pack')
     user_cig_per_day = user.get('cigarettes_per_day')
-    user_saved_money = user.get('saved_money')
+    user_saved_money = user.get('total_save_money')
     await change_the_price(val_price, conn)
     change_the_price_of_cigarettes(
         user_old_date, 
@@ -39,6 +39,6 @@ async def register_change(message: Message, state: FSMContext, conn: None):
         user_cig_per_day,
         user_saved_money
         )
-    await set_price_change_date(today_str, message.from_user.id, conn)
+    await set_price_change_date(today, message.from_user.id, conn)
     await state.clear()
     await message.answer("Цена успешно изменена!")
