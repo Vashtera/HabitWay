@@ -6,6 +6,8 @@ from database.requests import change_the_price, get_data_from_all_tables,set_pri
 from handlers.calculations import change_the_price_of_cigarettes
 from states.registration import Change
 
+from datetime import datetime
+
 
 router = Router()
 
@@ -23,7 +25,7 @@ async def register_change(message: Message, state: FSMContext, conn: None):
         return
     await state.update_data(cig_price_change = val_price)
     user = await get_data_from_all_tables(message.from_user.id, conn)
-    today_str = today_obj.strftime('%Y-%m-%d')
+    today_str = str(datetime.now().date())
     user_old_date = user.get('start_date')
     user_old_price = user.get('cigarette_price')
     user_cig_in_pack = user.get('cigarettes_in_pack')
