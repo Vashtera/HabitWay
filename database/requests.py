@@ -51,6 +51,6 @@ async def set_price_change_date(date: Any, tg_id: int, conn):
 
 async def reset_all_progress(date: Any, price_change_date: Any, tg_id: int, conn):
     return await conn.execute(
-        "UPDATE users SET start_date = $1, saved_money = 0, price_change_date = $2 WHERE tg_id = $3",
+        "UPDATE users SET start_date = $1, total_save_money = 0, price_change_date = $2 WHERE tg_id = $3",
         date, price_change_date, tg_id
     )
