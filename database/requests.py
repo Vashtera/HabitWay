@@ -43,3 +43,8 @@ async def change_the_price(new_price: float, conn):
     return await conn.fetchrow(
         "UPDATE cigarettes AS c SET cigarette_price = ($1) FROM users AS u WHERE c.cigarette_id = u.cigarette_id", new_price
     )
+
+async def set_price_change_date(date: str, tg_id: int, conn):
+    return await conn.fetchrow(
+        "UPDATE users SET price_change_date = ($1) WHERE tg_id = ($2)", date, tg_id
+    )
