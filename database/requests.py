@@ -43,8 +43,14 @@ async def change_the_price(new_price: float, conn):
     return await conn.execute(
         "UPDATE cigarettes AS c SET cigarette_price = ($1) FROM users AS u WHERE c.cigarette_id = u.cigarette_id", new_price
     )
-
+#изменение цены за пачку сигарет не теряя прошлого результата
 async def set_price_change_date(date: Any, tg_id: int, conn):
     return await conn.execute(
         "UPDATE users SET price_change_date = $1 WHERE tg_id = $2", date, tg_id
+    )
+
+async def reset_all_progress(date: Any, price_change_date: Any, tg_id: int, conn):
+    return await conn.execute(
+        "UPDATE users SET start_date = $1, saved_money = 0, price_change_date = $2 WHERE tg_id = $3",
+        date, price_change_date, tg_id
     )
