@@ -10,12 +10,27 @@ from datetime import datetime
 
 
 router = Router()
-
+'''
+Мы ловим месседж о том когда пользователь нажимает на кнопку о том что хочет поменять данные
+о стоимости сигарет, ставим состояние которое прописали в папке states/registration 
+и задаём вопрос
+'''
 @router.message(F.text == "Изменить данные")
 async def start_changes(message: Message, state: FSMContext):
     await state.set_state(Change.cig_price_change)
     await message.answer("Введите новую цену за пачку сигарет")
 
+'''
+Тут начинается процесс регистрации изменении
+мы присваиваем переменной val_price сообщение что мы получили пройдя валидацию на то что это число
+присваем состоянию эту переменную и обозначаем переменную user и передаем tg_id 
+для работы с 2 таблицами БД
+и начинаем через метод .get доставать данные которые есть в таблицах у пользователя
+соответственно сначала мы меняем данные в базе данных и передаём их в функцию в calculations.py
+и обновляем дату изменения цены
+освобождаем состояние и продолжаем работу
+
+'''
 @router.message(Change.cig_price_change)
 async def register_change(message: Message, state: FSMContext, conn: None):
     try:
