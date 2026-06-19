@@ -69,9 +69,8 @@ async def reg_start_date(message: Message, state: FSMContext, conn: None):
     user_cig_per_day = int(data.get("cig_per_day"))
     user_cig_price = float(data.get("cig_price"))
 
-    await add_cigarettes(user_cig_in_pack, user_cig_per_day, user_cig_price, conn)
-    cigarette_id = await get_user_by_tg_id(message.from_user.id, conn)
-    await add_user(tg_id, fullname, cigarette_id['cigarette_id'], start_date, conn)
+    cigarette = await add_cigarettes(user_cig_in_pack, user_cig_per_day, user_cig_price, conn)
+    await add_user(tg_id, fullname, cigarette['cigarette_id'], start_date, conn)
     await state.clear()
     await message.answer("Вы успешно прошли регистрацию!",
                          reply_markup=keyboard_for_existing_user)
