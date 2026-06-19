@@ -1,5 +1,5 @@
 import asyncio
-from config import TOKEN
+import os
 from handlers import register_routes
 from database.initialization import create_pool
 from keyboards.exist_keyboard import keyboard_for_existing_user 
@@ -13,6 +13,7 @@ from aiogram.types import Message
 
 
 dp = Dispatcher()
+TOKEN = os.getenv('BOT_TOKEN')
 
 
 # start Command handler
