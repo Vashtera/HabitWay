@@ -1,6 +1,5 @@
 .DS_store
 config.py
-initialization.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
