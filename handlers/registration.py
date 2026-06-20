@@ -10,7 +10,8 @@ from keyboards.exist_keyboard import keyboard_for_existing_user
 
 router = Router()
 
-@router.message(F.text == 'Зарегистрироваться')
+
+@router.message(F.text == "Зарегистрироваться")
 async def registration(message: Message, state: FSMContext):
     await state.set_state(Register.cig_price)
     await message.answer("Введите цену за пачку сигарет")
@@ -26,8 +27,8 @@ async def reg_cig_price(message: Message, state: FSMContext):
     await state.update_data(cig_price=val_price)
     await state.set_state(Register.cig_in_pack)
     await message.answer("Введите количество сигарет в пачке")
-    
-    
+
+
 @router.message(Register.cig_in_pack)
 async def reg_cig_in_pack(message: Message, state: FSMContext):
     try:
@@ -38,7 +39,7 @@ async def reg_cig_in_pack(message: Message, state: FSMContext):
     await state.update_data(cig_in_pack=val_cig_in_pack)
     await state.set_state(Register.cig_per_day)
     await message.answer("Введите количество сигарет которые Вы потребляете в день")
-    
+
 
 @router.message(Register.cig_per_day)
 async def reg_cig_per_day(message: Message, state: FSMContext):
@@ -50,14 +51,17 @@ async def reg_cig_per_day(message: Message, state: FSMContext):
     await state.update_data(cig_per_day=val_cig_per_day)
     await state.set_state(Register.start_date)
     try:
-        await message.answer("Введите дату когда Вы бросили курить в формате ДД.ММ.ГГГГ")
+        await message.answer(
+            "Введите дату когда Вы бросили курить в формате ДД.ММ.ГГГГ"
+        )
     except ValueError:
         await message.answer("Пожалуйста введите нужный формат ДД.ММ.ГГГГ")
-    
+
+
 @router.message(Register.start_date)
 async def reg_start_date(message: Message, state: FSMContext, conn: None):
     try:
-        val_start_date = datetime.strptime(message.text, '%d.%m.%Y').date()
+        val_start_date = datetime.strptime(message.text, "%d.%m.%Y").date()
     except ValueError:
         await message.answer("Пожалуйста введите нужный формат ДД.ММ.ГГГГ")
         return
@@ -69,8 +73,11 @@ async def reg_start_date(message: Message, state: FSMContext, conn: None):
     user_cig_per_day = int(data.get("cig_per_day"))
     user_cig_price = float(data.get("cig_price"))
 
-    cigarette = await add_cigarettes(user_cig_in_pack, user_cig_per_day, user_cig_price, conn)
-    await add_user(tg_id, fullname, cigarette['cigarette_id'], start_date, conn)
+    cigarette = await add_cigarettes(
+        user_cig_in_pack, user_cig_per_day, user_cig_price, conn
+    )
+    await add_user(tg_id, fullname, cigarette["cigarette_id"], start_date, conn)
     await state.clear()
-    await message.answer("Вы успешно прошли регистрацию!",
-                         reply_markup=keyboard_for_existing_user)
+    await message.answer(
+        "Вы успешно прошли регистрацию!", reply_markup=keyboard_for_existing_user
+    )
