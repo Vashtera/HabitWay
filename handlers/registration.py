@@ -5,7 +5,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
 from states.registration import Register
-from database.requests import add_user, add_cigarettes, get_user_by_tg_id
+from database.requests import add_user, add_cigarettes
 from keyboards.exist_keyboard import keyboard_for_existing_user
 
 router = Router()
